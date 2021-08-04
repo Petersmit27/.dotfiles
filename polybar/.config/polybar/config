@@ -1,0 +1,266 @@
+;==========================================================
+;
+;   ██████╗  ██████╗ ██╗     ██╗   ██╗██████╗ ██████╗ ██╗   ██╗██╗  ██╗
+;   ██╔══██╗██╔═══██╗██║     ╚██╗ ██╔╝██╔══██╗██╔══██╗██║   ██║██║  ██║
+;   ██████╔╝██║   ██║██║      ╚████╔╝ ██████╔╝██████╔╝██║   ██║███████║
+;   ██╔═══╝ ██║   ██║██║       ╚██╔╝  ██╔══██╗██╔══██╗██║   ██║██╔══██║
+;   ██║     ╚██████╔╝███████╗   ██║   ██████╔╝██║  ██║╚██████╔╝██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+;background = ${xrdb:color0:#222}
+background = #66222222
+background-alt = #66444444
+background-alter = #cc222222
+foreground = ${xrdb:color7:#222}
+;foreground = #dfdfdf
+foreground-alt = #555
+primary = ${xrdb:color1:#ffb52a}
+secondary = #e60053
+alert = #bd2c40
+
+[bar/example]
+monitor = ${env:MONITOR:}
+bottom=true
+width = 100%
+height = 25
+;offset-x = 1%
+;offset-y = 1%
+radius = 0 
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+pseudo-transparency = false
+
+
+line-size = 3
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+;padding-left = 0
+;padding-right = 2 
+
+module-margin-left = 0
+module-margin-right = 1 
+
+font-0 = Noto Sans Mono,Noto Sans Mono Medium:style=Medium,Regular:pixelsize=10;0
+font-1 = Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:pixelsize=10;0
+font-2 = Font Awesome 5 Brands,Font Awesome 5 Brands Regular:style=Regular:pixelsize=10;0
+font-3 = Noto Sans Mono CJK JP:style=Regular:pixelsize=10;0
+font-4 = Noto Sans Mono CJK SC:style=Regular:pixelsize=10;0
+font-5 = Noto Sans Mono CJK KR:style=Regular:pixelsize=10;0
+
+
+modules-left = i3
+modules-center = mpd
+modules-right = spotify pulseaudio wlan eth battery date
+
+tray-position = right
+tray-padding = 0
+tray-background = ${colors.background-alter}
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+scroll-up = i3wm-wsprev
+scroll-down = i3wm-wsnext
+
+cursor-click = pointer
+;cursor-scroll = ns-resize
+
+[module/spotify]
+type = custom/script
+interval = 1
+format =  <label>
+format-padding = 1
+
+exec = python  ~/.config/polybar/spotify_status.py -f '{song} - {artist}'
+;format-underline = ${colors.primary}
+;control players (optional)
+click-left = playerctl --player=spotify play-pause 
+click-right = playerctl --player=spotify next 
+click-middle = playerctl --player=spotify previous 
+
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = false
+wrapping-scroll = false
+
+ws-icon-0 = 1;1
+ws-icon-1 = 2;2
+ws-icon-2 = 3;3
+ws-icon-3 = 4;4
+ws-icon-4 = 5;5
+ws-icon-5 = 6;6
+ws-icon-6 = 7;7
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %icon%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon%
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %icon%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %icon%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+; Separator in between workspaces
+; label-separator = |
+
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <toggle> <icon-next>
+format-online-padding = 1
+
+label-song = %title% - %artist%
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 100
+label-song-ellipsis = true
+
+[module/wlan]
+type = internal/network
+interface = wlp0s20f3
+interval = 3.0
+
+format-connected = <label-connected>
+format-connected-padding = 1
+;format-connected-underline = #9f78e1
+label-connected =  %local_ip%
+
+format-disconnected =
+
+[module/eth]
+type = internal/network
+interface = net0
+interval = 3.0
+
+;format-connected-underline = #55aa55i
+format-connected-padding = 1
+label-connected =  %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+interval = 5
+
+format-padding = 1
+
+date = 
+date-alt = "%d-%m-%Y "
+
+time = %H:%M
+time-alt = %H:%M:%S
+
+format-prefix ="" 
+
+label = %date%%time%
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <ramp-volume> <label-volume>
+format-volume-padding = 1
+label-volume = "%percentage:2%%"
+label-volume-foreground = ${root.foreground}
+
+format-muted = "<label-muted> --%"
+format-muted-padding = 1
+label-muted = 
+label-muted-foreground = #666
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+click-right = pavucontrol
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+
+label-charging = "%percentage:2%%"
+format-charging = <ramp-capacity> <label-charging>
+format-charging-padding = 1
+
+;format-charging-underline = #ffb52a
+
+label-discharging = "%percentage:2%%"
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-padding = 1
+
+;format-discharging-underline = ${self.format-charging-underline}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+;ramp-capacity-foreground = ${colors.foreground-alt}
+
+[settings]
+screenchange-reload = true
+format-background = ${colors.background-alter}
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini

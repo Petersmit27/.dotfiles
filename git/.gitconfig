@@ -1,0 +1,12 @@
+[user]
+	name = Peter Smit
+	email = 43498358+Petersmit27@users.noreply.github.com
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[init]
+	defaultBranch = master
+[core]
+	autocrlf = input
