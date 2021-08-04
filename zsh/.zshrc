@@ -127,5 +127,10 @@ alias ctr="sudo systemctl restart"
 alias ctstop="sudo systemctl stop"
 alias cte="sudo systemctl enable"
 alias ctstart="sudo systemctl start"
+alias fcl="fc-list | grep"
+alias fcli="fc-list | grep -i"
+
+
+
 powerline-daemon -q
 . /usr/share/powerline/bindings/zsh/powerline.zsh
