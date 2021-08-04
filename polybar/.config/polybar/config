@@ -63,8 +63,8 @@ font-5 = Noto Sans Mono CJK KR:style=Regular:pixelsize=10;0
 
 
 modules-left = i3
-modules-center = mpd
-modules-right = spotify pulseaudio wlan eth battery date
+modules-center = 
+modules-right = mpd spotify pulseaudio wlan eth battery date
 
 tray-position = right
 tray-padding = 0
@@ -149,16 +149,11 @@ label-urgent-padding = 2
 
 [module/mpd]
 type = internal/mpd
-format-online = <label-song>  <icon-prev> <toggle> <icon-next>
+; okay what the fuck is this
+format-online = %{A1:mpc toggle:}%{A2:mpc prev:}%{A3:mpc next:}<label-song>%{A}%{A}%{A}
 format-online-padding = 1
 
-label-song = %title% - %artist%
-
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
+label-song =  %title% - %artist%
 
 label-song-maxlen = 100
 label-song-ellipsis = true
