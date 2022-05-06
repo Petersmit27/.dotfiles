@@ -4,6 +4,11 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/home/peter/.oh-my-zsh"
 
+#export XDG_CONFIG_HOME=~/.config
+#export PATH=$PATH:~/.local/bin
+#export ANDROID_SDK_ROOT=/home/peter/Android/Sdk
+
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -74,7 +79,6 @@ plugins=(
     git 
     zsh-syntax-highlighting
     sudo
-    web-search
     zsh_reload
 
 )
@@ -85,7 +89,7 @@ source $ZSH/oh-my-zsh.sh
 # Use lf to switch directories and bind it to ctrl-o
 lfcd () {
     tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
+    lfrun -last-dir-path="$tmp" "$@"
     if [ -f "$tmp" ]; then
         dir="$(cat "$tmp")"
         rm -f "$tmp" >/dev/null
@@ -116,6 +120,8 @@ export LANG=en_US.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias lf="lfrun"
+alias treesize="ncdu"
 alias sd="sudo"
 alias pm="pacman"
 alias pms="sudo pacman -S"
@@ -129,7 +135,9 @@ alias cte="sudo systemctl enable"
 alias ctstart="sudo systemctl start"
 alias fcl="fc-list | grep"
 alias fcli="fc-list | grep -i"
-
+alias usb="sudo mount /dev/sda1 /mnt"
+alias usbb="sudo mount /dev/sdb1 /mnt"
+alias umo="sudo umount /mnt"
 
 
 powerline-daemon -q

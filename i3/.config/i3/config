@@ -233,6 +233,7 @@ bindsym Print exec maim -su | xclip -selection clipboard -t image/png -i
 bindsym $mod+Print exec maim ~/Pictures/screenshots/$(date +%s).png
 
 exec xbacklight -set 20
+exec redshift-gtk
 exec_always xinput set-prop "SYNA307B:00 06CB:CD46 Touchpad" "libinput Tapping Enabled" 1
 exec_always xinput set-prop "SYNA307B:00 06CB:CD46 Touchpad" "libinput Natural Scrolling Enabled" 1
 
@@ -256,7 +257,7 @@ exec_always xinput set-prop "Logitech Wireless Mouse MX Master" "Evdev Scrolling
 #exec_always feh --bg-fill --randomize ~/Pictures/wallpapers/*.jpg
 exec_always randomWallpaper
 
-exec picom -b --config /home/peter/.config/picom.conf
+#exec picom -b --config /home/peter/.config/picom.conf
 exec blueman-applet&
 exec mpd-discord-rpc&
 
@@ -269,7 +270,7 @@ for_window [class="Spotify"] move to workspace $ws10
 
 exec spotify&
 exec discord&
-exec ferdi&
+#exec ferdi&
 exec brave&
 
 bindsym $mod+b exec brave&

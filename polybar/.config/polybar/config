@@ -227,7 +227,7 @@ adapter = AC
 full-at = 98
 
 label-charging = "%percentage:2%%"
-format-charging = <ramp-capacity> <label-charging>
+format-charging =  <label-charging>
 format-charging-padding = 1
 
 ;format-charging-underline = #ffb52a
