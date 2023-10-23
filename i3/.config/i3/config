@@ -218,7 +218,8 @@ bindsym $mod+r mode "resize"
 #}
 
 
-for_window [class=".*"] border pixel 0
+for_window [tiling] border pixel 0
+for_window [floating] border pixel 3
 #default_border pixel
 #default_floating_border normal
 hide_edge_borders both
@@ -229,7 +230,7 @@ bindsym Mod1+Tab workspace back_and_forth
 bindsym $mod+m exec xbacklight + 5
 bindsym $mod+n exec xbacklight - 5
 bindsym $mod+x exec lock 
-bindsym Print exec maim -su | xclip -selection clipboard -t image/png -i
+bindsym Print exec maim -s | xclip -selection clipboard -t image/png
 bindsym $mod+Print exec maim ~/Pictures/screenshots/$(date +%s).png
 
 exec xbacklight -set 20
@@ -243,6 +244,8 @@ exec_always xinput set-prop "SYNA307B:00 06CB:CD46 Touchpad" "libinput Natural S
 # move focused workspace between monitors
 bindsym $mod+Ctrl+Right move workspace to output right
 bindsym $mod+Ctrl+Left move workspace to output left
+bindsym $mod+Ctrl+Up move workspace to output up
+bindsym $mod+Ctrl+Down move workspace to output down
 
 exec_always xinput set-prop "Logitech M585/M590" "Coordinate Transformation Matrix" 0.6 0 0 0 0.6 0 0 0 1
 exec_always xinput set-prop "M585/M590 Mouse" "Coordinate Transformation Matrix" 0.6 0 0 0 0.6 0 0 0 1
@@ -264,16 +267,22 @@ exec mpd-discord-rpc&
 
 
 
-assign [class="Ferdi"] $ws8
+assign [class="Slack"] $ws6
+assign [class="thunderbird"] $ws7
+assign [class="whatsapp-nativefier-d40211"] $ws8
 assign [class="discord"] $ws9
 for_window [class="Spotify"] move to workspace $ws10
 
+
 exec spotify&
 exec discord&
-#exec ferdi&
-exec brave&
+exec thunderbird&
+exec whatsapp-nativefier&
+exec slack&
+exec firefox&
 
-bindsym $mod+b exec brave&
+
+bindsym $mod+b exec firefox&
 
 
 #Gaps stuff
@@ -313,9 +322,11 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-smart_gaps on
-gaps outer 5
-gaps inner 15
+#smart_gaps on
+#gaps outer 5
+#gaps outer 0
+#gaps inner 15
+#gaps inner 0
 
 
 
@@ -327,7 +338,7 @@ gaps inner 15
 # NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
 # it fails to get colors from Xresources.
 set_from_resource $fg i3wm.color7 #f0f0f0
-set_from_resource $bg i3wm.color2 #f0f0f0
+set_from_resource $bg i3wm.color0 #f0f0f0
 set_from_resource $active i3wm.color1 #f0f0f0
 
 # class                 border  backgr. text indicator child_border
@@ -340,10 +351,11 @@ client.placeholder      $bg     $bg     $fg  $bg       $bg
 client.background       $bg
 
 # PROTIP: You can also dynamically set dmenu's colors this way:
-bindsym $mod+d exec dmenu_run -nb "$fg" -nf "$bg" -sb "$bg" -sf "$fg" 
+bindsym $mod+d exec dmenu_run -nb "$bg" -nf "$fg" -sb "$fg" -sf "$bg" 
 
 
-
+#exec picom -b
+exec dunst &
 
 #polybruh
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh

@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/peter/.oh-my-zsh"
+ZSH=/usr/share/oh-my-zsh/
 
 #export XDG_CONFIG_HOME=~/.config
 #export PATH=$PATH:~/.local/bin
@@ -79,8 +79,7 @@ plugins=(
     git 
     zsh-syntax-highlighting
     sudo
-    zsh_reload
-
+    z
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -102,9 +101,86 @@ bindkey -s '^d' 'lfcd\n'
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+export LF_ICONS="di=📁:\
+fi=📃:\
+tw=🤝:\
+ow=📂:\
+ln=⛓:\
+or=❌:\
+ex=🎯:\
+*.txt=✍:\
+*.mom=✍:\
+*.me=✍:\
+*.ms=✍:\
+*.png=🖼:\
+*.webp=🖼:\
+*.ico=🖼:\
+*.jpg=📸:\
+*.jpe=📸:\
+*.jpeg=📸:\
+*.gif=🖼:\
+*.svg=🗺:\
+*.tif=🖼:\
+*.tiff=🖼:\
+*.xcf=🖌:\
+*.html=🌎:\
+*.xml=📰:\
+*.gpg=🔒:\
+*.css=🎨:\
+*.pdf=📚:\
+*.djvu=📚:\
+*.epub=📚:\
+*.csv=📓:\
+*.xlsx=📓:\
+*.tex=📜:\
+*.md=📘:\
+*.r=📊:\
+*.R=📊:\
+*.rmd=📊:\
+*.Rmd=📊:\
+*.m=📊:\
+*.mp3=🎵:\
+*.opus=🎵:\
+*.ogg=🎵:\
+*.m4a=🎵:\
+*.flac=🎼:\
+*.wav=🎼:\
+*.mkv=🎥:\
+*.mp4=🎥:\
+*.webm=🎥:\
+*.mpeg=🎥:\
+*.avi=🎥:\
+*.mov=🎥:\
+*.mpg=🎥:\
+*.wmv=🎥:\
+*.m4b=🎥:\
+*.flv=🎥:\
+*.zip=📦:\
+*.rar=📦:\
+*.7z=📦:\
+*.tar.gz=📦:\
+*.z64=🎮:\
+*.v64=🎮:\
+*.n64=🎮:\
+*.gba=🎮:\
+*.nes=🎮:\
+*.gdi=🎮:\
+*.1=ℹ:\
+*.nfo=ℹ:\
+*.info=ℹ:\
+*.log=📙:\
+*.iso=📀:\
+*.img=📀:\
+*.bib=🎓:\
+*.ged=👪:\
+*.part=💔:\
+*.torrent=🔽:\
+*.jar=♨:\
+*.java=♨:\
+"
 # Preferred editor for local and remote sessions
 #if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+#  export EDITOR='vim'
 #else
 #  export EDITOR='mvim'
 #fi
@@ -138,7 +214,23 @@ alias fcli="fc-list | grep -i"
 alias usb="sudo mount /dev/sda1 /mnt"
 alias usbb="sudo mount /dev/sdb1 /mnt"
 alias umo="sudo umount /mnt"
+alias update="sudo pacman -Syyu"
+alias orphanlist="pacman -Qtdq"
+alias killorphans="pacman -Qtdq | xargs sudo pacman --noconfirm -Rns"
+alias cwd="pwd"
+alias calc="qalc"
+alias isabedit="isabelle jedit"
+alias isacode="isabelle vscode"
+alias qr="qrencode -o - -t ansi256utf8"
 
 
 powerline-daemon -q
 . /usr/share/powerline/bindings/zsh/powerline.zsh
+
+# opam configuration
+[[ ! -r /home/peter/.opam/opam-init/init.zsh ]] || source /home/peter/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+

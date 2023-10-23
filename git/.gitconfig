@@ -1,6 +1,7 @@
 [user]
 	name = Peter Smit
-	email = 43498358+Petersmit27@users.noreply.github.com
+	email = p.j.m.smit@student.utwente.nl
+	signingkey = 0EAF063C2890D1F9
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
@@ -10,3 +11,9 @@
 	defaultBranch = master
 [core]
 	autocrlf = input
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg2
+[pull]
+	rebase = true

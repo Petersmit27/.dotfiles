@@ -15,26 +15,26 @@
 ;==========================================================
 
 [colors]
-;background = ${xrdb:color0:#222}
-background = #66222222
-background-alt = #66444444
-background-alter = #cc222222
+background = ${xrdb:color0:#222}
+;background = #66222222
+;background-alt = #66444444
+;background-alter = #cc222222
 foreground = ${xrdb:color7:#222}
-;foreground = #dfdfdf
-foreground-alt = #555
-primary = ${xrdb:color1:#ffb52a}
-secondary = #e60053
-alert = #bd2c40
+;;foreground = #dfdfdf
+;foreground-alt = #555
+;primary = ${xrdb:color1:#ffb52a}
+;secondary = #e60053
+;alert = #bd2c40
 
 [bar/example]
 monitor = ${env:MONITOR:}
-bottom=true
+bottom=false
 width = 100%
-height = 25
-;offset-x = 1%
-;offset-y = 1%
+height = 30
+;offset-x = 10%
+;offset-y = -10%
 radius = 0 
-fixed-center = false
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -42,11 +42,15 @@ foreground = ${colors.foreground}
 pseudo-transparency = false
 
 
-line-size = 3
-line-color = #f00
+;line-size = 10
+;line-color = #fff
 
-border-size = 0
-border-color = #00000000
+line-size = 20
+line-color = #000000
+
+
+;border-size = 0
+;border-color = #00000000
 
 ;padding-left = 0
 ;padding-right = 2 
@@ -54,26 +58,26 @@ border-color = #00000000
 module-margin-left = 0
 module-margin-right = 1 
 
-font-0 = Noto Sans Mono,Noto Sans Mono Medium:style=Medium,Regular:pixelsize=10;0
-font-1 = Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:pixelsize=10;0
-font-2 = Font Awesome 5 Brands,Font Awesome 5 Brands Regular:style=Regular:pixelsize=10;0
-font-3 = Noto Sans Mono CJK JP:style=Regular:pixelsize=10;0
-font-4 = Noto Sans Mono CJK SC:style=Regular:pixelsize=10;0
-font-5 = Noto Sans Mono CJK KR:style=Regular:pixelsize=10;0
+font-0 = Noto Sans Mono,Noto Sans Mono Medium:style=Medium,Regular:pixelsize=11;0
+font-1 = Font Awesome 6 Free,Font Awesome 6 Free Solid:style=Solid:pixelsize=11;0
+font-2 = Font Awesome 6 Brands,Font Awesome 6 Brands Regular:style=Regular:pixelsize=11;0
+font-3 = Noto Sans Mono CJK JP:style=Regular:pixelsize=11;0
+font-4 = Noto Sans Mono CJK SC:style=Regular:pixelsize=11;0
+font-5 = Noto Sans Mono CJK KR:style=Regular:pixelsize=11;0
 
 
 modules-left = i3
-modules-center = 
-modules-right = mpd spotify pulseaudio wlan eth battery date
+modules-center = title
+modules-right = mpd spotify pulseaudio battery date
 
 tray-position = right
 tray-padding = 0
 tray-background = ${colors.background-alter}
 
 ;wm-restack = bspwm
-;wm-restack = i3
+wm-restack = i3
 
-;override-redirect = true
+override-redirect = false
 
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
@@ -109,9 +113,9 @@ ws-icon-1 = 2;2
 ws-icon-2 = 3;3
 ws-icon-3 = 4;4
 ws-icon-4 = 5;5
-ws-icon-5 = 6;6
-ws-icon-6 = 7;7
-ws-icon-7 = 8;
+ws-icon-5 = 6;
+ws-icon-6 = 7; 
+ws-icon-7 = 8;  
 ws-icon-8 = 9;
 ws-icon-9 = 10;
 
@@ -145,6 +149,11 @@ label-urgent-padding = 2
 
 ; Separator in between workspaces
 ; label-separator = |
+
+
+[module/title]
+type = internal/xwindow
+
 
 
 [module/mpd]
@@ -225,6 +234,7 @@ type = internal/battery
 battery = BAT0
 adapter = AC
 full-at = 98
+low-at = 20
 
 label-charging = "%percentage:2%%"
 format-charging =  <label-charging>
@@ -236,6 +246,8 @@ label-discharging = "%percentage:2%%"
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-padding = 1
 
+label-full = " 100%"
+label-low = " %percentage:2%%"
 ;format-discharging-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = 
